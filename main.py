@@ -9,16 +9,6 @@ import subprocess
 import os
 import sys
 import socket
-import struct
-import ipaddress
-import xml.etree.ElementTree as ET
-import xml.dom.minidom
-
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-from multiprocessing import cpu_count
-from scapy.all import ARP, Ether, srp
-import netifaces
-import nmap
 
 
 def install_packages():
@@ -240,17 +230,29 @@ def display_in_prompt(host_info):
         else:
             print(f" - {key}: {value}")
 
-            if __name__ == "__main__":
-                install_packages()
 
-                open_port_range = [21, 22, 80, 443]
-                my_interfaces = get_my_interfaces()
-                print(f"Interfaces: {my_interfaces}")
-                my_network_ranges = get_my_network_ranges(my_interfaces)
-                print(f"Network Ranges: {my_network_ranges}")
-                active_ips = get_active_ips(my_network_ranges)
-                print("Active IPs:", active_ips)
-                for ip in active_ips:
-                    host_info = get_host_info(ip, open_port_range)
-                    display_in_prompt(host_info)
-                    create_xml_file(host_info)
+if __name__ == "__main__":
+    install_packages()
+
+    import struct
+    import ipaddress
+    import xml.etree.ElementTree as ET
+    import xml.dom.minidom
+
+    from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+    from multiprocessing import cpu_count
+    from scapy.all import ARP, Ether, srp
+    import netifaces
+    import nmap
+
+    open_port_range = [21, 22, 80, 443]
+    my_interfaces = get_my_interfaces()
+    print(f"Interfaces: {my_interfaces}")
+    my_network_ranges = get_my_network_ranges(my_interfaces)
+    print(f"Network Ranges: {my_network_ranges}")
+    active_ips = get_active_ips(my_network_ranges)
+    print("Active IPs:", active_ips)
+    for ip in active_ips:
+        host_info = get_host_info(ip, open_port_range)
+        display_in_prompt(host_info)
+        create_xml_file(host_info)
