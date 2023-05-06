@@ -1,8 +1,0 @@
-<?xml version="1.0" ?>
-<host_info>
-	<ip>192.168.1.90</ip>
-	<hostname>host.docker.internal</hostname>
-	<mac_address>Inconnu</mac_address>
-	<manufacturer>Inconnu</manufacturer>
-	<open_ports/>
-</host_info>
